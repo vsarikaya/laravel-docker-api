@@ -12,5 +12,18 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $allFiles = collect(Storage::disk('s3')->files());
+
+    $allImages = $allFiles->filter(function($item, $key){
+        $ext = pathinfo($item, PATHINFO_EXTENSION);
+        if(in_array($ext, ['jpg', 'jpeg', 'png', 'gif']))
+            return $item;
+    })->toArray();
+    
+    $files = [];
+    foreach($allImages as $file){
+        $files[] = Storage::disk('s3')->url($file);
+    }
+    
+    return view('welcome', compact('files'));
 });

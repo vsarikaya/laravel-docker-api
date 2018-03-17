@@ -82,6 +82,15 @@
                     Laravel
                 </div>
 
+                @if(count($files) > 0)
+                    <div class="images" style="text-align:center;margin-bottom:20px">
+                        <h3>AWS S3 Images</h3>
+                        @foreach($files as $file)
+                            <img src="{{ $file }}" alt="AWS Images" style="height:50px" />
+                        @endforeach
+                    </div>
+                @endif
+
                 <div class="links">
                     <a href="https://laravel.com/docs">Documentation</a>
                     <a href="https://laracasts.com">Laracasts</a>
