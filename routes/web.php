@@ -11,23 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    $allFiles = collect(Storage::disk('s3')->files());
-
-    $allImages = $allFiles->filter(function($item, $key){
-        $ext = pathinfo($item, PATHINFO_EXTENSION);
-        if(in_array($ext, ['jpg', 'jpeg', 'png', 'gif']))
-            return $item;
-    })->toArray();
-    
-    $files = [];
-    foreach($allImages as $file){
-        $files[] = Storage::disk('s3')->url($file);
-    }
-    
-    return view('welcome', compact('files'));
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');

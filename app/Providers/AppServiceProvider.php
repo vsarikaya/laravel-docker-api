@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\ServiceProvider;
+use App\Data\Repository\RepositoryIoCRegister;
+use App\Services\ServiceIoCRegister;
+use Illuminate\Support\{
+    Facades\Schema,
+    ServiceProvider
+};
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,7 +18,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Migration lenght fix
         Schema::defaultStringLength(191);
+
+        // Register Repository IoC
+        (new RepositoryIoCRegister())->register();
+
+        // Register Service IoC
+        (new ServiceIoCRegister())->register();
+
     }
 
     /**
@@ -24,6 +36,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
     }
 }
