@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Helpers\ResponseResult;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
@@ -13,7 +14,7 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+
     ];
 
     /**
@@ -48,6 +49,8 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+        return response()->json(
+            ResponseResult::generate(false, $exception->getCode(), null, $exception->getMessage())
+        );
     }
 }

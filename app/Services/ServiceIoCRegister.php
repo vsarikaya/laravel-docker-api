@@ -20,7 +20,7 @@ class ServiceIoCRegister
      *
      * @return void
      */
-    public function register() : void
+    public static function register() : void
     {
         app()->bind(IUserService::class, UserService::class);
 

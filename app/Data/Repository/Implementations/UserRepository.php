@@ -8,13 +8,11 @@
 
 namespace App\Data\Repository\Implementations;
 
-
-use App\Data\Model\User;
 use App\Data\Repository\{
     BaseRepository,
     Interfaces\IUserRepository
 };
-use Illuminate\Support\Collection;
+use \Illuminate\Contracts\Auth\Authenticatable;
 
 /**
  * UserRepository
@@ -24,13 +22,13 @@ use Illuminate\Support\Collection;
 class UserRepository extends BaseRepository implements IUserRepository
 {
     /**
-     * Get all users list
+     * Generate new user token
      *
-     * @return Collection
+     * @param Authenticatable $auth
+     * @return null|string
      */
-    public function getUserList(): Collection
+    public function generateToken(Authenticatable $auth): ?string
     {
-        return User::all();
+        return $auth->createToken('MyApp')->accessToken;
     }
-
 }

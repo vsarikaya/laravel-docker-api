@@ -49,4 +49,8 @@ class HomeController extends Controller
 
         return view('welcome', compact('files', 'users'));
     }
+
+    public function getUsers(){
+        return $this->userService->getAllUsers();
+    }
 }

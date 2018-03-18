@@ -8,7 +8,7 @@
 
 namespace App\Services\Interfaces;
 
-
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Collection;
 
 interface IUserService
@@ -16,7 +16,16 @@ interface IUserService
     /**
      * Get all users list
      *
-     * @return Collection
+     * @param array $userData
+     * @return bool
      */
-    public function getAllUsers() : Collection;
+    public function loginUser(array $userData): bool;
+
+    /**
+     * Generate new token
+     *
+     * @param array $userData
+     * @return null|string
+     */
+    public function generateToken(array $userData) : ?string;
 }

@@ -9,11 +9,19 @@
 namespace App\Services\Implementations;
 
 use App\Data\Repository\Interfaces\IUserRepository;
+use App\Exceptions\ResponseException;
+use Exception;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Auth;
+use App\Helpers\{
+    Response,
+    ResponseCodes
+};
 use App\Services\{
     BaseService,
     Interfaces\IUserService
 };
-use Illuminate\Support\Collection;
 
 /**
  * UserService
@@ -35,12 +43,49 @@ class UserService extends BaseService implements IUserService
     }
 
     /**
-     * Get all users list
+     * Get already logged user
      *
-     * @return Collection Users
+     * @return Authenticatable|null
      */
-    public function getAllUsers(): Collection
+    private function _getLoggedUser(): ?Authenticatable
     {
-        return $this->userRepository->getUserList();
+        return Auth::user() ?? null;
     }
+
+    /**
+     * Login user
+     *
+     * @param array $userData
+     * @return bool
+     */
+    public function loginUser(array $userData): bool
+    {
+        if($this->_getLoggedUser() == null)
+            return Auth::attempt($userData);
+
+        return true;
+    }
+
+    /**
+     * Generate new token
+     *
+     * @param array $userData
+     * @return null|string
+     * @throws Exception
+     */
+    public function generateToken(array $userData): ?string
+    {
+        if($this->_getLoggedUser() == null){
+            if($this->loginUser($userData) == false){
+                throw new Exception(__('auth.failed'), ResponseCodes::HTTP_UNAUTHORIZED);
+            }
+        }
+
+        try {
+            return $this->userRepository->generateToken($this->_getLoggedUser());
+        } catch (\Exception $exception) {
+            throw new Exception(__('exception.userToken'), $exception->getCode());
+        }
+    }
+
 }

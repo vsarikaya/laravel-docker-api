@@ -22,10 +22,10 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         // Register Repository IoC
-        (new RepositoryIoCRegister())->register();
+        RepositoryIoCRegister::register();
 
         // Register Service IoC
-        (new ServiceIoCRegister())->register();
+        ServiceIoCRegister::register();
 
     }
 

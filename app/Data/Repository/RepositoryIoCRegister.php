@@ -20,7 +20,7 @@ class RepositoryIoCRegister
      *
      * @return void
      */
-    public function register() : void
+    public static function register() : void
     {
         app()->bind(IUserRepository::class, UserRepository::class);
     }
