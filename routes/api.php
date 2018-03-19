@@ -21,5 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('userLogin', 'Api\V1\UserController@getTokenByUserAttributes');
 
 Route::group(['middleware' => ['auth:api'], 'namespace' => 'Api\V1'], function(){
-   Route::post('/users', 'UserController@getAllUsers');
+   Route::post('/category/getAllCategories', 'CategoryController@getAllCategories');
 });

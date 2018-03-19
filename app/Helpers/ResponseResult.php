@@ -11,7 +11,7 @@ namespace App\Helpers;
 
 class ResponseResult
 {
-    public static function generate(?string $message, int $errorCode = 200, bool $success = true): object
+    public static function generate($message = null, int $errorCode = 200, bool $success = true): object
     {
         if($success)
             return response()->json(['success' => $success, 'message' => $message], $errorCode);

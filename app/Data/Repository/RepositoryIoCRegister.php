@@ -9,8 +9,7 @@
 namespace App\Data\Repository;
 
 use App\Data\Repository\{
-    Implementations\UserRepository,
-    Interfaces\IUserRepository
+    Implementations\CategoryRepository, Implementations\UserRepository, Interfaces\ICategoryRepository, Interfaces\IUserRepository
 };
 
 class RepositoryIoCRegister
@@ -23,5 +22,6 @@ class RepositoryIoCRegister
     public static function register() : void
     {
         app()->bind(IUserRepository::class, UserRepository::class);
+        app()->bind(ICategoryRepository::class, CategoryRepository::class);
     }
 }
