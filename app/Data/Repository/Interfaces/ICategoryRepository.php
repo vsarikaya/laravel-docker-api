@@ -26,9 +26,10 @@ interface ICategoryRepository
      * Get category detail with musics by category id
      *
      * @param int $id
+     * @param int $user_id
      * @return Category
      */
-    public function getCategoryWithMusicsByCategoryId(int $id) : Category;
+    public function getCategoryWithMusicsByCategoryId(int $id, int $user_id) : Category;
 
     /**
      * Get all categories list

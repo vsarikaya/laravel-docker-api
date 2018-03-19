@@ -43,4 +43,14 @@ class CategoryMusics extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    /**
+     * Relation for User Favorite Musics
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function user_favorite_musics()
+    {
+        return $this->hasMany(UserFavoriteMusics::class, 'category_music_id');
+    }
 }

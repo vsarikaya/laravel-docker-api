@@ -27,4 +27,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Relation for favorite musics
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function favorite_musics()
+    {
+        return $this->hasMany(UserFavoriteMusics::class);
+    }
 }

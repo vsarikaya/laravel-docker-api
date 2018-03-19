@@ -48,6 +48,6 @@ class CategoryController extends BaseApiController
      */
     public function getCategoryWithMusicsByCategoryId(Request $request)
     {
-        return ResponseResult::generate($this->categoryService->getCategoryWithMusicsByCategoryId($request->json()->get('id')), ResponseCodes::HTTP_OK);
+        return ResponseResult::generate($this->categoryService->getCategoryWithMusicsByCategoryId($request->json()->get('id'), $request->json()->get('user_id')), ResponseCodes::HTTP_OK);
     }
 }

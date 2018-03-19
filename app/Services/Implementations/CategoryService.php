@@ -55,17 +55,18 @@ class CategoryService extends BaseService implements ICategoryService
      * Get category detail with musics by category id
      *
      * @param int $id
+     * @param int $user_id
      * @return Category
      * @throws NotFoundRecordException
      */
-    public function getCategoryWithMusicsByCategoryId(int $id) : Category
+    public function getCategoryWithMusicsByCategoryId(int $id, int $user_id) : Category
     {
         Log::channel('api')->info("CategoryService called --> Request getCategoryWithMusicsByCategoryId() function");
 
         try {
             Log::channel('api')->info("CategoryService called --> Return category with musics by id : $id");
 
-            return $this->categoryRepository->getCategoryWithMusicsByCategoryId($id);
+            return $this->categoryRepository->getCategoryWithMusicsByCategoryId($id, $user_id);
         } catch (\Exception $exception) {
             throw new NotFoundRecordException(__('exception.notFoundRecord'), $exception->getCode());
         }
