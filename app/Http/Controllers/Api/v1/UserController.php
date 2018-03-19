@@ -8,7 +8,6 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Helpers\Response;
 use App\Helpers\ResponseCodes;
 use App\Helpers\ResponseResult;
 use App\Http\Requests\UserLoginRequest;
@@ -38,5 +37,6 @@ class UserController extends BaseApiController
     {
         return ResponseResult::generate($this->userService->generateToken($request->all()), ResponseCodes::HTTP_OK);
     }
+
 
 }

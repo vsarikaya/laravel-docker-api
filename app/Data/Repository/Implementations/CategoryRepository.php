@@ -38,7 +38,7 @@ class CategoryRepository extends BaseRepository implements ICategoryRepository
     public function getCategoryWithMusicsByCategoryId(int $id, int $user_id) : Category
     {
         return $this->getCategoryById($id)->load(['musics' => function($query) use($user_id){
-            $query->whereHas(['user_favorite_musics' => function($subQuery) use ($user_id){
+            $query->withCount(['user_favorite_musics' => function($subQuery) use ($user_id){
                 $subQuery->where('user_id', $user_id);
             }]);
         }]);

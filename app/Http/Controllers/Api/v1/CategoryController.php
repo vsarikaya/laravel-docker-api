@@ -8,26 +8,26 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-
-use App\Data\Model\Category;
-use App\Exceptions\NotFoundRecordException;
 use App\Helpers\ResponseCodes;
 use App\Helpers\ResponseResult;
 use App\Services\Interfaces\ICategoryService;
+use App\Services\Interfaces\IUserFavoriteMusicsService;
 use Illuminate\Http\Request;
 
 class CategoryController extends BaseApiController
 {
     private $categoryService;
+    private $userFavoriteMusicsService;
 
     /**
      * CategoryController constructor.
      *
      * @param ICategoryService $ICategoryService
      */
-    public function __construct(ICategoryService $ICategoryService)
+    public function __construct(ICategoryService $ICategoryService, IUserFavoriteMusicsService $IUserFavoriteMusicsService)
     {
         $this->categoryService = $ICategoryService;
+        $this->userFavoriteMusicsService = $IUserFavoriteMusicsService;
     }
 
     /**
@@ -43,11 +43,23 @@ class CategoryController extends BaseApiController
     /**
      * Get category detail with musics by category id
      *
-     * @param Request $request
+     * @param Request $request (Accept: id, user_id)
      * @return object
      */
-    public function getCategoryWithMusicsByCategoryId(Request $request)
+    public function getCategoryWithMusicsByCategoryId(Request $request) : object
     {
         return ResponseResult::generate($this->categoryService->getCategoryWithMusicsByCategoryId($request->json()->get('id'), $request->json()->get('user_id')), ResponseCodes::HTTP_OK);
     }
+
+    /**
+     * Add or remove exists musics from favorite list
+     *
+     * @param Request $request (Accept: music_id, user_id)
+     * @return object
+     */
+    public function addOrRemoveFromFavoriteList(Request $request) : object
+    {
+        return ResponseResult::generate($this->userFavoriteMusicsService->addOrRemoveFromFavoriteList($request->json()->get('music_id'), $request->json()->get('user_id')), ResponseCodes::HTTP_OK);
+    }
+
 }

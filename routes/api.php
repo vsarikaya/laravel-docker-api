@@ -13,14 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-
 Route::post('userLogin', 'Api\V1\UserController@getTokenByUserAttributes');
 
 Route::group(['middleware' => ['auth:api'], 'namespace' => 'Api\V1'], function(){
     Route::post('/category/getAllCategories', 'CategoryController@getAllCategories');
     Route::post('/category/getCategoryWithMusicsByCategoryId', 'CategoryController@getCategoryWithMusicsByCategoryId');
+    Route::post('/category/addOrRemoveFromFavoriteList', 'CategoryController@addOrRemoveFromFavoriteList');
 });
