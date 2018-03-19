@@ -5,8 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use App\Helpers\{
-    Response,
-    ResponseCodes
+    ResponseCodes, ResponseResult
 };
 
 class UserLoginRequest extends FormRequest
@@ -38,10 +37,10 @@ class UserLoginRequest extends FormRequest
      * Failed api custom response
      *
      * @param Validator $validator
-     * @return \Illuminate\Http\JsonResponse
+     * @return object
      */
     protected function failedValidation(Validator $validator)
     {
-        return Response::responseMakerJson(implode(", ",$validator->errors()->all()), ResponseCodes::HTTP_BAD_REQUEST);
+        return ResponseResult::generate(implode(", ",$validator->errors()->all()), ResponseCodes::HTTP_BAD_REQUEST, false);
     }
 }

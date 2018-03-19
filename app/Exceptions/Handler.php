@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Helpers\Response;
 use App\Helpers\ResponseResult;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -50,7 +51,7 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @return object
      */
     public function render($request, Exception $exception)
     {
@@ -61,14 +62,10 @@ class Handler extends ExceptionHandler
 
         // Filter custom exception
         if($exception instanceof TokenException){
-            return response()->json(
-                ResponseResult::generate(false, $exception->getCode(), $exception->getMessage())
-            );
+            return ResponseResult::generate($exception->getMessage(), $exception->getCode(), false);
         }
 
         // Set default exception hidden exception detail
-        return response()->json(
-            ResponseResult::generate(false, 404, __('exception.pageNotFound'))
-        );
+        return ResponseResult::generate(__('exception.pageNotFound'), 404, false);
     }
 }

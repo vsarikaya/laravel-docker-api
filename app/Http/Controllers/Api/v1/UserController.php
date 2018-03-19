@@ -36,7 +36,7 @@ class UserController extends BaseApiController
      */
     public function getTokenByUserAttributes(UserLoginRequest $request): object
     {
-        return Response::responseMakerJson($this->userService->generateToken($request->all()), ResponseCodes::HTTP_OK);
+        return ResponseResult::generate($this->userService->generateToken($request->all()), ResponseCodes::HTTP_OK);
     }
 
 }

@@ -11,11 +11,11 @@ namespace App\Helpers;
 
 class ResponseResult
 {
-    public static function generate(bool $success, int $errorCode = 200, ?string $message): array
+    public static function generate(?string $message, int $errorCode = 200, bool $success = true): object
     {
         if($success)
-            return ['success' => $success, 'message' => $message];
+            return response()->json(['success' => $success, 'message' => $message], $errorCode);
         else
-            return ['success' => $success, 'errorMessage' => $message, 'errorCode' => $errorCode];
+            return response()->json(['success' => $success, 'errorMessage' => $message, 'errorCode' => $errorCode], $errorCode);
     }
 }

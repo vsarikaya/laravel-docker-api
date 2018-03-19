@@ -74,7 +74,7 @@ return [
 
         'api' => [
             'driver' => 'single',
-            'path' => storage_path('logs/' . date('Y_m_d') . '-system.log'),
+            'path' => storage_path('logs/' . date('Y_m_d') . '-api.log'),
             'level' => 'debug',
         ]
     ],
