@@ -23,6 +23,7 @@ use App\Services\{
     BaseService,
     Interfaces\IUserService
 };
+use Illuminate\Support\Facades\Log;
 
 /**
  * UserService
@@ -61,6 +62,8 @@ class UserService extends BaseService implements IUserService
      */
     public function loginUser(array $userData): bool
     {
+        Log::channel('api')->info("UserService called --> Request loginUser() function");
+
         if($this->_getLoggedUser() == null)
             return Auth::attempt($userData);
 
@@ -76,6 +79,8 @@ class UserService extends BaseService implements IUserService
      */
     public function generateToken(array $userData): ?string
     {
+        Log::channel('api')->info("UserService called --> Request generateToken() function");
+
         if($this->_getLoggedUser() == null){
             if($this->loginUser($userData) == false){
                 throw new TokenException(__('auth.failed'), ResponseCodes::HTTP_UNAUTHORIZED);
@@ -83,6 +88,8 @@ class UserService extends BaseService implements IUserService
         }
 
         try {
+            Log::channel('api')->info("UserService called --> Return token for " . $this->_getLoggedUser()->name . " user");
+
             return $this->userRepository->generateToken($this->_getLoggedUser());
         } catch (\Exception $exception) {
             throw new TokenException(__('exception.userToken'), $exception->getCode());

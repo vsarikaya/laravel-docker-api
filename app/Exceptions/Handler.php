@@ -55,9 +55,9 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         // Log exception
-        Log::channel('custom')->error("errorCode: \t" . $exception->getCode() . "\t" .
-                                      "errorMessage: \t" . $exception->getMessage() . "\t" .
-                                      "file: \t" . $exception->getFile() . ":" . $exception->getLine());
+        Log::channel('exception')->error("errorCode: \t" . $exception->getCode() . "\t" .
+                                         "errorMessage: \t" . $exception->getMessage() . "\t" .
+                                         "file: \t" . $exception->getFile() . ":" . $exception->getLine());
 
         // Filter custom exception
         if($exception instanceof TokenException){

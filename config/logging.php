@@ -66,11 +66,17 @@ return [
             'level' => 'debug',
         ],
 
-        'custom' => [
+        'exception' => [
             'driver' => 'single',
-            'path' => storage_path('logs/' . date('Y_m_d') . '-laravel.log'),
+            'path' => storage_path('logs/' . date('Y_m_d') . '-exception.log'),
             'level' => 'debug',
         ],
+
+        'api' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/' . date('Y_m_d') . '-system.log'),
+            'level' => 'debug',
+        ]
     ],
 
 ];
