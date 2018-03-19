@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use App\Helpers\ResponseResult;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Log;
 
 class Handler extends ExceptionHandler
 {
@@ -14,7 +15,11 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-
+        \Illuminate\Auth\AuthenticationException::class,
+        \Illuminate\Auth\Access\AuthorizationException::class,
+        \Symfony\Component\HttpKernel\Exception\HttpException::class,
+        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
+        \Illuminate\Validation\ValidationException::class,
     ];
 
     /**
@@ -49,8 +54,21 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        // Log exception
+        Log::channel('custom')->error("errorCode: \t" . $exception->getCode() . "\t" .
+                                      "errorMessage: \t" . $exception->getMessage() . "\t" .
+                                      "file: \t" . $exception->getFile() . ":" . $exception->getLine());
+
+        // Filter custom exception
+        if($exception instanceof TokenException){
+            return response()->json(
+                ResponseResult::generate(false, $exception->getCode(), $exception->getMessage())
+            );
+        }
+
+        // Set default exception hidden exception detail
         return response()->json(
-            ResponseResult::generate(false, $exception->getCode(), null, $exception->getMessage())
+            ResponseResult::generate(false, 404, __('exception.pageNotFound'))
         );
     }
 }

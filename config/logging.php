@@ -65,6 +65,12 @@ return [
             'driver' => 'errorlog',
             'level' => 'debug',
         ],
+
+        'custom' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/' . date('Y_m_d') . '-laravel.log'),
+            'level' => 'debug',
+        ],
     ],
 
 ];

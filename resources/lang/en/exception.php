@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'userToken' => 'Technical problem.'
+    'userToken'     => 'Technical problem.',
+    'pageNotFound'  => 'Not Found'
 ];

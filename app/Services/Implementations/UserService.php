@@ -10,6 +10,7 @@ namespace App\Services\Implementations;
 
 use App\Data\Repository\Interfaces\IUserRepository;
 use App\Exceptions\ResponseException;
+use App\Exceptions\TokenException;
 use Exception;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -77,14 +78,14 @@ class UserService extends BaseService implements IUserService
     {
         if($this->_getLoggedUser() == null){
             if($this->loginUser($userData) == false){
-                throw new Exception(__('auth.failed'), ResponseCodes::HTTP_UNAUTHORIZED);
+                throw new TokenException(__('auth.failed'), ResponseCodes::HTTP_UNAUTHORIZED);
             }
         }
 
         try {
             return $this->userRepository->generateToken($this->_getLoggedUser());
         } catch (\Exception $exception) {
-            throw new Exception(__('exception.userToken'), $exception->getCode());
+            throw new TokenException(__('exception.userToken'), $exception->getCode());
         }
     }
 
