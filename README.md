@@ -16,7 +16,7 @@
   $ docker-compose exec app php artisan passport:install
 ```
 
-#CURL
+# CURL
 
 
 **Get Token**
