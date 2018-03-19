@@ -15,13 +15,34 @@ use Illuminate\Support\Collection;
 
 class CategoryRepository implements ICategoryRepository
 {
+    /**
+     * Get category detail by category id
+     *
+     * @param int $id
+     * @return Category
+     */
+    public function getCategoryById(int $id) : Category
+    {
+        return Category::findOrFail($id);
+    }
+
+    /**
+     * Get category detail with musics by category id
+     *
+     * @param int $id
+     * @return Category
+     */
+    public function getCategoryWithMusicsByCategoryId(int $id) : Category
+    {
+        return $this->getCategoryById($id)->load('musics');
+    }
 
     /**
      * Get all categories list
      *
      * @return Collection
      */
-    public function getAllCategories(): Collection
+    public function getAllCategories() : Collection
     {
         return Category::orderby('order_number')->get();
     }

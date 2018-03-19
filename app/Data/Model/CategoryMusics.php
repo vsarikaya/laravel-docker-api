@@ -3,28 +3,29 @@
  * Created by PhpStorm.
  * User: VoLKaN
  * Date: 19.03.2018
- * Time: 21:51
+ * Time: 22:52
  */
 
 namespace App\Data\Model;
 
+
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class CategoryMusics extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'category';
+    protected $table = 'category_musics';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'picture', 'order_number'];
+    protected $fillable = ['name', 'picture', 'sound_url', 'order_number', 'category_id'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -34,12 +35,12 @@ class Category extends Model
     protected $hidden = ['created_at', 'updated_at'];
 
     /**
-     * Relation for CategoryMusics
+     * Relation for Category
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function musics()
+    public function category()
     {
-        return $this->hasMany(CategoryMusics::class);
+        return $this->belongsTo(Category::class);
     }
 }
