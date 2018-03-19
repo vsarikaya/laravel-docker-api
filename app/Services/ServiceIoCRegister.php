@@ -3,7 +3,8 @@
 namespace App\Services;
 
 use App\Services\{
-    Implementations\CategoryService, Implementations\UserService, Interfaces\ICategoryService, Interfaces\IUserService
+    Implementations\CategoryMusicsService, Implementations\CategoryService, Implementations\UserService,
+    Interfaces\ICategoryMusicsService, Interfaces\ICategoryService, Interfaces\IUserService
 };
 
 /**
@@ -23,6 +24,7 @@ class ServiceIoCRegister
     {
         app()->bind(IUserService::class, UserService::class);
         app()->bind(ICategoryService::class, CategoryService::class);
+        app()->bind(ICategoryMusicsService::class, CategoryMusicsService::class);
 
     }
 }
