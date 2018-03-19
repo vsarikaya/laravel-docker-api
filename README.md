@@ -66,8 +66,8 @@ curl -X POST \
   -H 'Content-Type: application/json' \
   -H 'Postman-Token: e4941b92-085a-ca72-008d-011d23698e50' \
   -d '{
-	        "music_id" : 2,
-	        "user_id": 1
+	    "music_id" : 2,
+	    "user_id": 1
     }'
 ```
 
