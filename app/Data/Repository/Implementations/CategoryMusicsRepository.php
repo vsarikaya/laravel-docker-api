@@ -9,9 +9,10 @@
 namespace App\Data\Repository\Implementations;
 
 
+use App\Data\Repository\BaseRepository;
 use App\Data\Repository\Interfaces\ICategoryMusicsRepository;
 
-class CategoryMusicsRepository implements ICategoryMusicsRepository
+class CategoryMusicsRepository extends BaseRepository implements ICategoryMusicsRepository
 {
 
 }

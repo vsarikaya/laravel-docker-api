@@ -9,9 +9,10 @@
 namespace App\Services\Implementations;
 
 
+use App\Services\BaseService;
 use App\Services\Interfaces\ICategoryMusicsService;
 
-class CategoryMusicsService implements ICategoryMusicsService
+class CategoryMusicsService extends BaseService implements ICategoryMusicsService
 {
 
 }

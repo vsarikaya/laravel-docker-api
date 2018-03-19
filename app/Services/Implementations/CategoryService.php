@@ -11,12 +11,13 @@ namespace App\Services\Implementations;
 
 use App\Data\Repository\Interfaces\ICategoryRepository;
 use App\Exceptions\NotFoundRecordException;
+use App\Services\BaseService;
 use App\Services\Interfaces\ICategoryService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use App\Data\Model\Category;
 
-class CategoryService implements ICategoryService
+class CategoryService extends BaseService implements ICategoryService
 {
     private $categoryRepository;
 

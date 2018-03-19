@@ -10,10 +10,11 @@ namespace App\Data\Repository\Implementations;
 
 
 use App\Data\Model\Category;
+use App\Data\Repository\BaseRepository;
 use App\Data\Repository\Interfaces\ICategoryRepository;
 use Illuminate\Support\Collection;
 
-class CategoryRepository implements ICategoryRepository
+class CategoryRepository extends BaseRepository implements ICategoryRepository
 {
     /**
      * Get category detail by category id
