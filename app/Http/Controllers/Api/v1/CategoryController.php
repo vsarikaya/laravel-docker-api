@@ -23,6 +23,7 @@ class CategoryController extends BaseApiController
      * CategoryController constructor.
      *
      * @param ICategoryService $ICategoryService
+     * @param IUserFavoriteMusicsService $IUserFavoriteMusicsService
      */
     public function __construct(ICategoryService $ICategoryService, IUserFavoriteMusicsService $IUserFavoriteMusicsService)
     {
@@ -38,7 +39,7 @@ class CategoryController extends BaseApiController
     public function getAllCategories() : object
     {
         return ResponseResult::generate($this->categoryService->getAllCategories(), ResponseCodes::HTTP_OK);
-    }
+}
 
     /**
      * Get category detail with musics by category id

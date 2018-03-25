@@ -2,7 +2,6 @@
 
 namespace App\Exceptions;
 
-use App\Helpers\Response;
 use App\Helpers\ResponseResult;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -61,7 +60,7 @@ class Handler extends ExceptionHandler
                                          "file: \t" . $exception->getFile() . ":" . $exception->getLine());
 
         // Filter custom exception
-        if($exception instanceof TokenException){
+        if($exception instanceof TokenException || $exception instanceof NotFoundRecordException){
             return ResponseResult::generate($exception->getMessage(), $exception->getCode(), false);
         }
 

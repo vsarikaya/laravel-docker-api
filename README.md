@@ -11,8 +11,10 @@
 **2. Install**
 ```
   $ docker-compose up
-  $ docker-compose exec app php artisan migrate
-  $ docker-compose exec app php artisan db:seed
+  $ docker-compose exec app composer install
+  $ docker-compose exec app cp .env.example .env
+  $ docker-compose exec app php artisan key:generate
+  $ docker-compose exec app php artisan migrate | php artisan db:seed
   $ docker-compose exec app php artisan passport:install
 ```
 
